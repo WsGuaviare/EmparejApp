@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +17,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Juego extends AppCompatActivity {
-    int nivel,ran;
+    int nivel,ran,aleatorio=0,click=0;
+    int anterior=-1,anteriorId=-1;
+    int si=0;
     ArrayList<ImageView> Ids;
     ArrayList<Integer> imagenes;
     ArrayList<Integer> juego;
@@ -55,10 +58,6 @@ public class Juego extends AppCompatActivity {
         punJug2.setText("0");
         tiempo.setText("0");
         //seleccion random del jugador que inicia
-        Random random=new Random(SystemClock.currentThreadTimeMillis());
-        ran=random.nextInt(2)+1;
-        GenerarJugadores();
-        Log.d("verificar",String.valueOf(ran));
         imagenes.add(R.drawable.imagen1);imagenes.add(R.drawable.imagen2);imagenes.add(R.drawable.imagen3);imagenes.add(R.drawable.imagen4);imagenes.add(R.drawable.imagen5);imagenes.add(R.drawable.imagen6);imagenes.add(R.drawable.imagen7);imagenes.add(R.drawable.imagen8);imagenes.add(R.drawable.duda);
         ReiniciarCartas(0);
         GenerarCartas();
@@ -71,15 +70,15 @@ public class Juego extends AppCompatActivity {
         for(int i=0;i<ciclo;i++){
             if(donde==0){
                 juego.add(0);
-                Ids.get(i).setImageResource(0);
+                Ids.get(i).setImageResource(imagenes.get(8));
             }
             else {
-                Ids.get(i).setImageResource(juego.get(i));
+                Ids.get(i).setImageResource(imagenes.get(8));
             }
         }
     }
     private void GenerarCartas(){
-        int aleatorio=0,cartas=0;
+        int cartas=0;
         Random rnd=new Random(SystemClock.currentThreadTimeMillis());
         int posicion=0;
         if(nivel==1 || nivel==4){
@@ -101,9 +100,11 @@ public class Juego extends AppCompatActivity {
                     posicion=rnd.nextInt(aleatorio);
                 }
                 juego.set(posicion,imagenes.get(i));
-                ReiniciarCartas(1);
             }
         }
+        ran=rnd.nextInt(2)+1;
+        Log.d("verificar",String.valueOf(ran));
+        GenerarJugadores();
     }
     private void GenerarJugadores(){
         if(ran==1){
@@ -119,5 +120,32 @@ public class Juego extends AppCompatActivity {
             punJug1.setTextColor(Color.parseColor("#808080"));
         }
 
+    }
+    public void Juego(View view){
+        ImageView imagen=findViewById(view.getId());
+        for(int i=0;i<aleatorio;i++){
+            if(Ids.get(i).getId()==view.getId()){
+                Ids.get(i).setImageResource(juego.get(i));
+                if(view.getId()!=(anteriorId)) {
+                    click++;
+                    if(juego.get(i).equals(anterior)){
+                        Ids.get(i).setVisibility(view.INVISIBLE);
+                        imagen=findViewById(anteriorId);
+                        imagen.setVisibility(view.INVISIBLE);
+                        si=1;
+                    }
+                    if(click==2){
+                        Click();
+                    }
+                    anterior=juego.get(i);
+                }
+                anteriorId=view.getId();
+                break;
+            }
+        }
+    }
+    private void Click(){
+        click=0;
+        ReiniciarCartas(1);
     }
 }
