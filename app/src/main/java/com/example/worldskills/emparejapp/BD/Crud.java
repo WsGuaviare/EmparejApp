@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.example.worldskills.emparejapp.Entidades.PuntajeVo;
 import com.example.worldskills.emparejapp.Entidades.listaVo;
 
 import java.util.ArrayList;
@@ -44,19 +46,20 @@ public class Crud extends SQLiteOpenHelper {
         Crud crud=new Crud(context,"emparejados",null,1);
         SQLiteDatabase db=crud.getWritableDatabase();
     }
-    private void modificar(Context context,String table,String Id,ContentValues registro){
+    public void modificar(Context context,String table,String Id,ContentValues registro){
         Crud crud=new Crud(context,"emparejados",null,1);
         SQLiteDatabase db=crud.getWritableDatabase();
+        Log.d("verificar2",Id+"      " +registro.get("puntaje"));
         db.update(table,registro,"id="+Id,null);
     }
     ArrayList<listaVo> lista;
-    private void consultar(Context context, String table, ArrayList<listaVo> lista){
+    public void consultar(Context context, String table, ArrayList<listaVo> lista){
         this.lista=lista;
         Crud crud=new Crud(context,"emparejados",null,1);
         SQLiteDatabase db=crud.getWritableDatabase();
         Cursor cursor=db.rawQuery("select * from "+table,null);
         while (cursor.moveToNext()){
-            lista.add(new listaVo(cursor.getColumnName(1),cursor.getColumnName(2),cursor.getColumnName(3)));
+            lista.add(new listaVo(cursor.getString(1),cursor.getString(2),cursor.getString(3)));
         }
         cursor.close();
     }
