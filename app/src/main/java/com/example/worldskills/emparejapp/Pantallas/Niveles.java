@@ -13,7 +13,7 @@ import com.example.worldskills.emparejapp.Tiempo.Tiempo;
 
 public class Niveles extends AppCompatActivity {
     Button facil,medio,dificil;
-    TextView temp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +21,6 @@ public class Niveles extends AppCompatActivity {
         facil=findViewById(R.id.facilId);
         medio=findViewById(R.id.medioId);
         dificil=findViewById(R.id.dificilId);
-        temp = findViewById(R.id.temp);
-        final Tiempo iniciar = new Tiempo();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                iniciar.temporizador(temp, 1,30);
-            }
-        },1000);
 
         facil.setOnClickListener(new View.OnClickListener() {
             @Override
