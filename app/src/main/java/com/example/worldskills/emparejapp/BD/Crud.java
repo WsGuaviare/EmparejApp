@@ -2,8 +2,13 @@ package com.example.worldskills.emparejapp.BD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.worldskills.emparejapp.Entidades.listaVo;
+
+import java.util.ArrayList;
 
 public class Crud extends SQLiteOpenHelper {
     public Crud(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -38,5 +43,21 @@ public class Crud extends SQLiteOpenHelper {
     public void iniciarDB(Context context){
         Crud crud=new Crud(context,"emparejados",null,1);
         SQLiteDatabase db=crud.getWritableDatabase();
+    }
+    private void modificar(Context context,String table,String Id,ContentValues registro){
+        Crud crud=new Crud(context,"emparejados",null,1);
+        SQLiteDatabase db=crud.getWritableDatabase();
+        db.update(table,registro,"id="+Id,null);
+    }
+    ArrayList<listaVo> lista;
+    private void consultar(Context context, String table, ArrayList<listaVo> lista){
+        this.lista=lista;
+        Crud crud=new Crud(context,"emparejados",null,1);
+        SQLiteDatabase db=crud.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from "+table,null);
+        while (cursor.moveToNext()){
+            lista.add(new listaVo(cursor.getColumnName(1),cursor.getColumnName(2),cursor.getColumnName(3)));
+        }
+        cursor.close();
     }
 }
