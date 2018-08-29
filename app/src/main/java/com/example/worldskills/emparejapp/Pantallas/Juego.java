@@ -3,6 +3,7 @@ package com.example.worldskills.emparejapp.Pantallas;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -143,15 +144,23 @@ public class Juego extends AppCompatActivity {
                                 if(juego.get(finalI).equals(anterior)){
                                     (findViewById(anteriorId)).setVisibility(view.INVISIBLE);
                                     Ids.get(finalI).setVisibility(view.INVISIBLE);
-                                    if(ran==1)punJug1.setText(String.valueOf(Integer.valueOf(punJug1.getText().toString())+100));
-                                    else if(ran==2) punJug2.setText(String.valueOf(Integer.valueOf(punJug2.getText().toString())+100));
+                                    if(ran==1){
+                                        punJug1.setText(String.valueOf(Integer.valueOf(punJug1.getText().toString())+100));
+                                        sonido(true);
+                                    }
+                                    else if(ran==2){
+                                        punJug2.setText(String.valueOf(Integer.valueOf(punJug2.getText().toString())+100));
+                                        sonido(true);
+                                    }
                                 }else{
                                     if(ran==1){
                                         punJug1.setText(String.valueOf(Integer.valueOf(punJug1.getText().toString())-2));
+                                        sonido(false);
                                         ran=2;
                                     }
                                     else if(ran==2){
                                         punJug2.setText(String.valueOf(Integer.valueOf(punJug2.getText().toString())-2));
+                                        sonido(false);
                                         ran=1;
                                     }
                                     GenerarJugadores();
@@ -181,6 +190,16 @@ public class Juego extends AppCompatActivity {
                 anteriorId=view.getId();
                 break;
             }
+        }
+    }
+
+    private void sonido(Boolean estado) {
+        if (estado==true){
+            MediaPlayer sonar = MediaPlayer.create(Juego.this,R.raw.win3);
+            sonar.start();
+        }else if (estado==false){
+            MediaPlayer sonar = MediaPlayer.create(Juego.this,R.raw.lose6);
+            sonar.start();
         }
     }
 }
