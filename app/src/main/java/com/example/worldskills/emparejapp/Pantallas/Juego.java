@@ -2,6 +2,7 @@ package com.example.worldskills.emparejapp.Pantallas;
 
 import android.graphics.Color;
 import android.media.Image;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -122,20 +123,24 @@ public class Juego extends AppCompatActivity {
 
     }
     public void Juego(View view){
-        ImageView imagen=findViewById(view.getId());
+        ImageView imagen;
         for(int i=0;i<aleatorio;i++){
             if(Ids.get(i).getId()==view.getId()){
                 Ids.get(i).setImageResource(juego.get(i));
                 if(view.getId()!=(anteriorId)) {
                     click++;
                     if(juego.get(i).equals(anterior)){
-                        Ids.get(i).setVisibility(view.INVISIBLE);
                         imagen=findViewById(anteriorId);
+                        Ids.get(i).setVisibility(view.INVISIBLE);
                         imagen.setVisibility(view.INVISIBLE);
                         si=1;
                     }
                     if(click==2){
                         Click();
+                        click=0;
+                        anterior=0;
+                        anteriorId=-1;
+                        break;
                     }
                     anterior=juego.get(i);
                 }
@@ -145,7 +150,19 @@ public class Juego extends AppCompatActivity {
         }
     }
     private void Click(){
-        click=0;
-        ReiniciarCartas(1);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ReiniciarCartas(1);
+                for(int i=0;i<aleatorio;i++){
+                    Ids.get(i).setEnabled(true);
+                }
+                if(si==1){
+                }
+            }
+        },1000);
+        for(int i=0;i<aleatorio;i++){
+            Ids.get(i).setEnabled(false);
+        }
     }
 }
