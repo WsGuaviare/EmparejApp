@@ -1,5 +1,6 @@
 package com.example.worldskills.emparejapp.Pantallas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.media.MediaPlayer;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Juego extends AppCompatActivity {
-    int nivel,ran,aleatorio=0,click=0;
+    String player1,player2;
+    int nivel,ran,aleatorio=0,click=0,parejas=0;
     int anterior=-1,anteriorId=-1;
     ArrayList<ImageView> Ids;
     ArrayList<Integer> imagenes;
@@ -58,6 +60,10 @@ public class Juego extends AppCompatActivity {
         punJug1.setText("0");
         punJug2.setText("0");
         tiempo.setText("0");
+        //recibe extra
+        player1=getIntent().getStringExtra("player1");
+        player2=getIntent().getStringExtra("player2");
+
         //seleccion random del jugador que inicia
         imagenes.add(R.drawable.imagen1);imagenes.add(R.drawable.imagen2);imagenes.add(R.drawable.imagen3);imagenes.add(R.drawable.imagen4);imagenes.add(R.drawable.imagen5);imagenes.add(R.drawable.imagen6);imagenes.add(R.drawable.imagen7);imagenes.add(R.drawable.imagen8);imagenes.add(R.drawable.duda);
         ReiniciarCartas(0);
@@ -167,6 +173,15 @@ public class Juego extends AppCompatActivity {
                         },1000);
                         for(int j=0;j<aleatorio;j++){
                             Ids.get(j).setEnabled(false);
+                        }
+                        parejas++;
+                        if(parejas==aleatorio/2){
+                            Intent intent=new Intent(Juego.this,Resultados.class);
+                            intent.putExtra("player1",player1);
+                            intent.putExtra("player2",player2);
+                            intent.putExtra("puntaje1",punJug1.getText());
+                            intent.putExtra("puntaje2",punJug2.getText());
+                            startActivity(intent);
                         }
                         break;
                     }
