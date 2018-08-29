@@ -20,7 +20,6 @@ import java.util.Random;
 public class Juego extends AppCompatActivity {
     int nivel,ran,aleatorio=0,click=0;
     int anterior=-1,anteriorId=-1;
-    int si=0;
     ArrayList<ImageView> Ids;
     ArrayList<Integer> imagenes;
     ArrayList<Integer> juego;
@@ -104,7 +103,6 @@ public class Juego extends AppCompatActivity {
             }
         }
         ran=rnd.nextInt(2)+1;
-        Log.d("verificar",String.valueOf(ran));
         GenerarJugadores();
     }
     private void GenerarJugadores(){
@@ -122,24 +120,45 @@ public class Juego extends AppCompatActivity {
         }
 
     }
-    public void Juego(View view){
-        ImageView imagen;
+    public void Juego(final View view){
         for(int i=0;i<aleatorio;i++){
             if(Ids.get(i).getId()==view.getId()){
                 Ids.get(i).setImageResource(juego.get(i));
                 if(view.getId()!=(anteriorId)) {
                     click++;
-                    if(juego.get(i).equals(anterior)){
-                        imagen=findViewById(anteriorId);
-                        Ids.get(i).setVisibility(view.INVISIBLE);
-                        imagen.setVisibility(view.INVISIBLE);
-                        si=1;
-                    }
                     if(click==2){
-                        Click();
-                        click=0;
-                        anterior=0;
-                        anteriorId=-1;
+                        final int finalI = i;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                for(int i=0;i<aleatorio;i++){
+                                    Ids.get(i).setEnabled(true);
+                                }
+                                if(juego.get(finalI).equals(anterior)){
+                                    (findViewById(anteriorId)).setVisibility(view.INVISIBLE);
+                                    Ids.get(finalI).setVisibility(view.INVISIBLE);
+                                    if(ran==1)punJug1.setText(String.valueOf(Integer.valueOf(punJug1.getText().toString())+100));
+                                    else if(ran==2) punJug2.setText(String.valueOf(Integer.valueOf(punJug2.getText().toString())+100));
+                                }else{
+                                    if(ran==1){
+                                        punJug1.setText(String.valueOf(Integer.valueOf(punJug1.getText().toString())-2));
+                                        ran=2;
+                                    }
+                                    else if(ran==2){
+                                        punJug2.setText(String.valueOf(Integer.valueOf(punJug2.getText().toString())-2));
+                                        ran=1;
+                                    }
+                                    GenerarJugadores();
+                                }
+                                click=0;
+                                anterior=0;
+                                anteriorId=-1;
+                                ReiniciarCartas(1);
+                            }
+                        },1000);
+                        for(int j=0;j<aleatorio;j++){
+                            Ids.get(j).setEnabled(false);
+                        }
                         break;
                     }
                     anterior=juego.get(i);
@@ -147,22 +166,6 @@ public class Juego extends AppCompatActivity {
                 anteriorId=view.getId();
                 break;
             }
-        }
-    }
-    private void Click(){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ReiniciarCartas(1);
-                for(int i=0;i<aleatorio;i++){
-                    Ids.get(i).setEnabled(true);
-                }
-                if(si==1){
-                }
-            }
-        },1000);
-        for(int i=0;i<aleatorio;i++){
-            Ids.get(i).setEnabled(false);
         }
     }
 }
