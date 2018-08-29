@@ -22,6 +22,7 @@
         <activity android:name=".Pantallas.Niveles" >
 
         </activity>
+
         <activity android:name=".Pantallas.Juego" />
         <activity android:name=".Pantallas.Resultados" />
         <activity android:name=".Pantallas.Configuracion" />

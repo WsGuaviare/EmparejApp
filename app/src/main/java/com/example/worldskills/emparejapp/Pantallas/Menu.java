@@ -24,7 +24,7 @@ public class Menu extends AppCompatActivity {
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Menu.this,Juego.class);
+                Intent intent=new Intent(Menu.this,Niveles.class);
                 intent.putExtra("player1",player1);
                 intent.putExtra("player2",player2);
                 startActivity(intent);
