@@ -55,14 +55,13 @@ public class Juego extends AppCompatActivity {
         punJug2=findViewById(R.id.puntaje2);
         tiempo=findViewById(R.id.tiempo);
         //obtener intent
-        nomJug1.setText("Daniel");
-        nomJug2.setText("Alirio");
+        player1=getIntent().getStringExtra("player1");
+        player2=getIntent().getStringExtra("player2");
+        nomJug1.setText(player1);
+        nomJug2.setText(player2);
         punJug1.setText("0");
         punJug2.setText("0");
         tiempo.setText("0");
-        //recibe extra
-        player1=getIntent().getStringExtra("player1");
-        player2=getIntent().getStringExtra("player2");
 
         //seleccion random del jugador que inicia
         imagenes.add(R.drawable.imagen1);imagenes.add(R.drawable.imagen2);imagenes.add(R.drawable.imagen3);imagenes.add(R.drawable.imagen4);imagenes.add(R.drawable.imagen5);imagenes.add(R.drawable.imagen6);imagenes.add(R.drawable.imagen7);imagenes.add(R.drawable.imagen8);imagenes.add(R.drawable.duda);
@@ -142,6 +141,7 @@ public class Juego extends AppCompatActivity {
                                     Ids.get(i).setEnabled(true);
                                 }
                                 if(juego.get(finalI).equals(anterior)){
+                                    parejas++;
                                     (findViewById(anteriorId)).setVisibility(view.INVISIBLE);
                                     Ids.get(finalI).setVisibility(view.INVISIBLE);
                                     if(ran==1){
@@ -165,6 +165,14 @@ public class Juego extends AppCompatActivity {
                                     }
                                     GenerarJugadores();
                                 }
+                                if(parejas==aleatorio/2){
+                                    Intent intent=new Intent(Juego.this,Resultados.class);
+                                    intent.putExtra("player1",player1);
+                                    intent.putExtra("player2",player2);
+                                    intent.putExtra("puntaje1",punJug1.getText());
+                                    intent.putExtra("puntaje2",punJug2.getText());
+                                    startActivity(intent);
+                                }
                                 click=0;
                                 anterior=0;
                                 anteriorId=-1;
@@ -173,15 +181,6 @@ public class Juego extends AppCompatActivity {
                         },1000);
                         for(int j=0;j<aleatorio;j++){
                             Ids.get(j).setEnabled(false);
-                        }
-                        parejas++;
-                        if(parejas==aleatorio/2){
-                            Intent intent=new Intent(Juego.this,Resultados.class);
-                            intent.putExtra("player1",player1);
-                            intent.putExtra("player2",player2);
-                            intent.putExtra("puntaje1",punJug1.getText());
-                            intent.putExtra("puntaje2",punJug2.getText());
-                            startActivity(intent);
                         }
                         break;
                     }
