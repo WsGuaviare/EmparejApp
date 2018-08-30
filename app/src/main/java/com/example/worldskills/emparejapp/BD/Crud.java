@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.worldskills.emparejapp.Entidades.PuntajeVo;
 import com.example.worldskills.emparejapp.Entidades.listaVo;
 
 import java.util.ArrayList;

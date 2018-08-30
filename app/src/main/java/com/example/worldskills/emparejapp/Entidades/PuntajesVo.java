@@ -1,9 +1,9 @@
 package com.example.worldskills.emparejapp.Entidades;
 
-public class PuntajeVo {
+public class PuntajesVo {
     String player1,player2,player3,player4,puntaje1,puntaje2,puntaje3,puntaje4,tiempo1,tiempo2,tiempo3,tiempo4;
 
-    public PuntajeVo(String player1, String player2, String player3, String player4, String puntaje1, String puntaje2, String puntaje3, String puntaje4, String tiempo1, String tiempo2, String tiempo3, String tiempo4) {
+    public PuntajesVo(String player1, String player2, String player3, String player4, String puntaje1, String puntaje2, String puntaje3, String puntaje4, String tiempo1, String tiempo2, String tiempo3, String tiempo4) {
         this.player1 = player1;
         this.player2 = player2;
         this.player3 = player3;

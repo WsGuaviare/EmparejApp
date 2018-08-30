@@ -3,11 +3,9 @@ package com.example.worldskills.emparejapp.Pantallas;
 import android.content.ContentValues;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.worldskills.emparejapp.BD.Crud;
-import com.example.worldskills.emparejapp.Entidades.PuntajeVo;
 import com.example.worldskills.emparejapp.Entidades.listaVo;
 import com.example.worldskills.emparejapp.R;
 
@@ -18,13 +16,11 @@ public class Resultados extends AppCompatActivity {
     int nivel;
     TextView jugador1,jugador2,score1,score2,time1,time2;
     ArrayList<listaVo> lista;
-    ArrayList<PuntajeVo> puntaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
         lista=new ArrayList<>();
-        puntaje=new ArrayList<>();
         player1=getIntent().getStringExtra("player1");
         player2=getIntent().getStringExtra("player2");
         puntaje1=getIntent().getStringExtra("puntaje1");
@@ -73,5 +69,4 @@ public class Resultados extends AppCompatActivity {
             }
         }
     }
-
 }
