@@ -22,6 +22,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 Intent inicio = new Intent(getApplicationContext(),Inicio.class);
                 startActivity(inicio);
+                finish();
 
             }
         },2000);

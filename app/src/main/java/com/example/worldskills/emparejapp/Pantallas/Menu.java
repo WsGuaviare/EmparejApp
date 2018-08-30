@@ -20,6 +20,7 @@ public class Menu extends AppCompatActivity {
         iniciar=findViewById(R.id.iniciarId);
         puntajes=findViewById(R.id.puntajesId);
         configuracion=findViewById(R.id.configuracionId);
+
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
