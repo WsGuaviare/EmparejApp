@@ -79,6 +79,12 @@ public class Resultados extends AppCompatActivity {
                 }
 
                 crud.modificar(this,"tb_puntaje",String.valueOf(i+((nivel-1)*4)+1),registro);
+                if(player3==player2){
+                    break;
+                }
+                player3=player2;
+                puntaje3=puntaje2;
+                insertar();
 
                 break;
             }
