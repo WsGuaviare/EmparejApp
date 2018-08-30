@@ -173,6 +173,7 @@ public class Juego extends AppCompatActivity {
                                     intent.putExtra("puntaje2",punJug2.getText());
                                     intent.putExtra("nivel",nivel);
                                     startActivity(intent);
+                                    finish();
                                 }
                                 click=0;
                                 anterior=0;
