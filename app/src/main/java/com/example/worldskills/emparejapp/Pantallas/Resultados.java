@@ -73,7 +73,5 @@ public class Resultados extends AppCompatActivity {
             }
         }
     }
-    private void LlenarList(){
-        for(int i=0;i<)
-    }
+
 }

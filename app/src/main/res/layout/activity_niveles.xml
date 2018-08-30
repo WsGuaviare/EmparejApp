@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".Pantallas.Niveles">
 
@@ -11,18 +13,24 @@
         android:id="@+id/facilId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#0071BC"
         android:text="Fácil" />
 
     <Button
         android:id="@+id/medioId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#0071BC"
         android:text="Medio" />
 
     <Button
         android:id="@+id/dificilId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#0071BC"
         android:text="Difícil" />
 
 </LinearLayout>

@@ -43,6 +43,7 @@ public class Inicio extends AppCompatActivity {
                 menu.putExtra("player1",player1.getText().toString());
                 menu.putExtra("player2",player2.getText().toString());
             startActivity(menu);
+            finish();
         }
     }
 }
